@@ -16,43 +16,55 @@ struct ToDoListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(toDos) { toDo in
-                    HStack {
-                        Image(systemName: toDo.isCompleted ? "checkmark.rectangle" : "rectangle")
-                            .onTapGesture {
-                                toDo.isCompleted.toggle()
+            ZStack(alignment: .bottomTrailing) {
+                
+                List {
+                    Section {
+                        ForEach(toDos) { toDo in
+                            HStack {
+                                Image(systemName: toDo.isCompleted ? "checkmark.rectangle" : "rectangle")
+                                    .onTapGesture {
+                                        toDo.isCompleted.toggle()
+                                    }
+                                
+                                NavigationLink {
+                                    DetailView(toDo: toDo)
+                                } label: {
+                                    Text(toDo.item)
+                                }
                             }
-                        
-                        NavigationLink {
-                            DetailView(toDo: toDo)
-                        } label: {
-                            Text(toDo.item)
+                            .font(.title2)
+                            .swipeActions{
+                                Button("Delete", role: .destructive) {
+                                    modelContext.delete(toDo)
+                                }
+                            }
                         }
+                    } header: {
+                        Text("Gear List")
+                            .font(.title2)
+                            .bold()
+                            .foregroundStyle(.unitPrimaryForeground)
                     }
-                    .font(.title2)
-                    .swipeActions{
-                        Button("Delete", role: .destructive) {
-                            modelContext.delete(toDo)
-                        }
-                    }
+                    
                 }
-            }
-            .navigationTitle("Packing List")
-            .navigationBarTitleDisplayMode(.automatic)
-            .listStyle(.plain)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        sheetIsPresented.toggle()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+                
+                Button {
+                    sheetIsPresented.toggle()
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .foregroundColor(.unitPrimaryForeground)
+                        .accentColor(.white)
+                        .frame(width: 60, height: 60)
+                        .padding()
                 }
-            }
-            .sheet(isPresented: $sheetIsPresented) {
-                NavigationStack {
-                    DetailView(toDo: ToDo()) // new value
+                .clipShape(Circle())
+                .padding()
+                .sheet(isPresented: $sheetIsPresented) {
+                    NavigationStack {
+                        DetailView(toDo: ToDo()) // new value
+                    }
                 }
             }
         }

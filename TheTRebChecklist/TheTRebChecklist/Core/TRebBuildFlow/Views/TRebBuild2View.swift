@@ -14,7 +14,7 @@ struct TRebBuild2View: View {
         NavigationStack{
             VStack(alignment: .leading) {
                 TitleHeaderView(title: "Canister")
-                ProgressBarView(progress: Double((350/7) * 1))
+                ProgressBarView(progress: Double((350/8) * 1))
                     .padding(.leading)
                 Form {
                     Section {

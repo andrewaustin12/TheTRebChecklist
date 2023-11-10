@@ -11,28 +11,24 @@ struct TRebBuild6View: View {
     @Environment(\.presentationMode) var presentationMode
     @State var showSheet: Bool = false
     
-    @State private var isDiluentBailoutOCRegChecked = false
-    @State private var isDiluentHoseConnectedChecked = false
-    @State private var isControlerOnChecked = false
-    @State private var isOxygenHoseConnectedChecked = false
-    @State private var isPreBreatheDoneChecked = false
+    @ObservedObject var appViewModel: AppViewModel
     
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
                 TitleHeaderView(title: "Prebreathe Checks")
-                ProgressBarView(progress: Double((350/7) * 5))
+                ProgressBarView(progress: Double((350/8) * 5))
                     .padding(.leading)
                 List {
                     Section {
                         // Step 19
-                        Toggle("Breathe from / check function of Diluent open circuit bail out regulator", isOn: $isDiluentBailoutOCRegChecked)
+                        Toggle("Breathe from / check function of Diluent open circuit bail out regulator", isOn: $appViewModel.trebBuild6ViewModel.isDiluentBailoutOCRegChecked)
                         // Step 20
-                        Toggle("Connect Diluent supply hose to unit and open valve", isOn: $isDiluentHoseConnectedChecked)
+                        Toggle("Connect Diluent supply hose to unit and open valve", isOn: $appViewModel.trebBuild6ViewModel.isDiluentHoseConnectedChecked)
                         // Step 21
-                        Toggle("Switch controler on", isOn: $isControlerOnChecked)
+                        Toggle("Switch controler on", isOn: $appViewModel.trebBuild6ViewModel.isControlerOnChecked)
                         // Step 22
-                        Toggle("Connect Oxygen supply hose to unit and open valve", isOn: $isOxygenHoseConnectedChecked)
+                        Toggle("Connect Oxygen supply hose to unit and open valve", isOn: $appViewModel.trebBuild6ViewModel.isOxygenHoseConnectedChecked)
                         
                         
                     } header: {
@@ -41,7 +37,7 @@ struct TRebBuild6View: View {
                     
                     Section {
                         // Step 23
-                        Toggle("Perform a 2 minute PRE-BREATHE check", isOn: $isPreBreatheDoneChecked)
+                        Toggle("Perform a 2 minute PRE-BREATHE check", isOn: $appViewModel.trebBuild6ViewModel.isPreBreatheDoneChecked)
                         Button {
                             showSheet.toggle()
                         } label: {
@@ -62,7 +58,7 @@ struct TRebBuild6View: View {
                 }
             }
             NavigationLink("Next") {
-                TRebBuild7View()
+                TRebBuild7View(appViewModel: appViewModel)
             }
             .modifier(PrimaryButtonModifier())
             .foregroundColor(.white)
@@ -82,5 +78,5 @@ struct TRebBuild6View: View {
 }
 
 #Preview {
-    TRebBuild6View()
+    TRebBuild6View(appViewModel: AppViewModel())
 }

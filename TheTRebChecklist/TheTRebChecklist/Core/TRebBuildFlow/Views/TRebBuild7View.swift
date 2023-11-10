@@ -9,30 +9,26 @@ import SwiftUI
 
 struct TRebBuild7View: View {
     
-    @State private var isMAVo2DilChecked = false
-    @State private var isAcsOperationalChecked = false
-    @State private var isSolenoidWorkingChecked = false
-    @State private var isControllerOffChecked = false
-    @State private var isOxygenMiddlePressureChecked = false
+    @ObservedObject var appViewModel: AppViewModel
     
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
                 TitleHeaderView(title: "Operational Checks")
-                ProgressBarView(progress: Double((350/7) * 6))
+                ProgressBarView(progress: Double((350/8) * 6))
                     .padding(.leading)
                 List {
                     Section {
                         // Step 24
-                        Toggle("Check operation of manual addition valve \n(oxygen and diluent)", isOn: $isMAVo2DilChecked)
+                        Toggle("Check operation of manual addition valve \n(oxygen and diluent)", isOn: $appViewModel.trebBuild7ViewModel.isMAVo2DilChecked)
                         // Step 25
-                        Toggle("Check operation of ACS while breathing from unit", isOn: $isAcsOperationalChecked)
+                        Toggle("Check operation of ACS while breathing from unit", isOn: $appViewModel.trebBuild7ViewModel.isAcsOperationalChecked)
                         // Step 26
-                        Toggle("Check if the Solenoid is working", isOn: $isSolenoidWorkingChecked)
+                        Toggle("Check if the Solenoid is working", isOn: $appViewModel.trebBuild7ViewModel.isSolenoidWorkingChecked)
                         // Step 27
-                        Toggle("Turn off controller for transportation and close all valves", isOn: $isControllerOffChecked)
+                        Toggle("Turn off controller for transportation and close all valves", isOn: $appViewModel.trebBuild7ViewModel.isControllerOffChecked)
                         // Step 28
-                        Toggle("Check middle pressure of oxygen First Stage", isOn: $isOxygenMiddlePressureChecked)
+                        Toggle("Check middle pressure of oxygen First Stage", isOn: $appViewModel.trebBuild7ViewModel.isOxygenMiddlePressureChecked)
                         Text("Note: \nShould be 5 bar")
                             .foregroundStyle(.unitPrimaryForeground)
                         
@@ -43,7 +39,7 @@ struct TRebBuild7View: View {
                 }
             }
             NavigationLink("Finish") {
-                TRebBuildSummaryView()
+                TRebBuild8View(appViewModel: appViewModel)
             }
             .modifier(PrimaryButtonModifier())
             .foregroundColor(.white)
@@ -63,5 +59,5 @@ struct TRebBuild7View: View {
 }
 
 #Preview {
-    TRebBuild7View()
+    TRebBuild7View(appViewModel: AppViewModel())
 }

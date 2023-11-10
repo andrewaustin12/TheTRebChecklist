@@ -8,22 +8,18 @@
 import SwiftUI
 
 struct TRebBuild4View: View {
-    @State private var isInspectedForDamageWearChecked = false
-    @State private var isOPRVClosedChecked = false
-    @State private var isUnitAssembledCanClosedChecked = false
-    @State private var isMouthPieceValvesChecked = false
-    @State private var isLoopAssembledToUnitChecked = false
+    @ObservedObject var appViewModel: AppViewModel
     
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
                 TitleHeaderView(title: "Assembly")
-                ProgressBarView(progress: Double((350/7) * 3))
+                ProgressBarView(progress: Double((350/8) * 3))
                     .padding(.leading)
                 Form {
                     Section {
                         // Step 11
-                        Toggle("Inspect for damage or wear:", isOn: $isInspectedForDamageWearChecked)
+                        Toggle("Inspect for damage or wear:", isOn: $appViewModel.trebBuild4ViewModel.isInspectedForDamageWearChecked)
                         VStack(alignment: .leading) {
                             Text("- Harness")
                             Text("- Sidemount")
@@ -36,16 +32,16 @@ struct TRebBuild4View: View {
                     }
                     Section {
                         // Step 12
-                        Toggle("OPRV Valve should be close from the counterlung before assembling ", isOn: $isOPRVClosedChecked)
+                        Toggle("OPRV Valve should be close from the counterlung before assembling ", isOn: $appViewModel.trebBuild4ViewModel.isOPRVClosedChecked)
                         
                         // Step 13
-                        Toggle("Assemble unit (without loop) be sure the canister is closed (bayonet system)", isOn: $isUnitAssembledCanClosedChecked)
+                        Toggle("Assemble unit (without loop) be sure the canister is closed (bayonet system)", isOn: $appViewModel.trebBuild4ViewModel.isUnitAssembledCanClosedChecked)
                         
                         // Step 14
-                        Toggle("Check correct functioning of one way valves in mouth piece", isOn: $isMouthPieceValvesChecked)
+                        Toggle("Check correct functioning of one way valves in mouth piece", isOn: $appViewModel.trebBuild4ViewModel.isMouthPieceValvesChecked)
                         
                         // Step 15
-                        Toggle("Assemble loop to the unit", isOn: $isLoopAssembledToUnitChecked)
+                        Toggle("Assemble loop to the unit", isOn: $appViewModel.trebBuild4ViewModel.isLoopAssembledToUnitChecked)
                         Text("Note: \nPosition loop for diving in correct way")
                             .font(.footnote)
                             .bold()
@@ -58,7 +54,7 @@ struct TRebBuild4View: View {
                 }
             }
             NavigationLink("Next") {
-                TRebBuild5View()
+                TRebBuild5View(appViewModel: appViewModel)
             }
             .modifier(PrimaryButtonModifier())
             .foregroundColor(.white)
@@ -78,5 +74,5 @@ struct TRebBuild4View: View {
 }
 
 #Preview {
-    TRebBuild4View()
+    TRebBuild4View(appViewModel: AppViewModel())
 }

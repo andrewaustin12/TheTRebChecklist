@@ -8,41 +8,33 @@
 import SwiftUI
 
 struct TRebBuild3View: View {
-    @State private var isMVAmbientAirChecked = false
-    @State private var s1ReadingAir = ""
-    @State private var s2ReadingAir = ""
-    @State private var s3ReadingAir = ""
-    @State private var isCalibratedWith02Checked = false
-    @State private var isMVHighOxygenChecked = false
-    @State private var s1ReadingHighO2 = ""
-    @State private var s2ReadingHighO2 = ""
-    @State private var s3ReadingHighO2 = ""
+    @ObservedObject var appViewModel: AppViewModel
     
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
                 TitleHeaderView(title: "Calibration")
-                ProgressBarView(progress: Double((350/7) * 2))
+                ProgressBarView(progress: Double((350/8) * 2))
                     .padding(.leading)
                 Form {
                     Section {
                         // Step 8
-                        Toggle("MV (Ambient Air)", isOn: $isMVAmbientAirChecked)
+                        Toggle("MV (Ambient Air)", isOn: $appViewModel.trebBuild3ViewModel.isMVAmbientAirChecked)
                         HStack {
                             Section(header: Text("S1")) {
-                                TextField("%", text: $s1ReadingAir)
+                                TextField("mV", text: $appViewModel.trebBuild3ViewModel.s1ReadingAir)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                             Section(header: Text("S2")) {
-                                TextField("%", text: $s2ReadingAir)
+                                TextField("mV", text: $appViewModel.trebBuild3ViewModel.s2ReadingAir)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                             Section(header: Text("S3")) {
-                                TextField("%", text: $s3ReadingAir)
+                                TextField("mV", text: $appViewModel.trebBuild3ViewModel.s3ReadingAir)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
@@ -55,7 +47,7 @@ struct TRebBuild3View: View {
                     
                     Section {
                         // Step 9
-                        Toggle("Calibrate the unit with 100% Oxygen", isOn: $isCalibratedWith02Checked)
+                        Toggle("Calibrate the unit with 100% Oxygen", isOn: $appViewModel.trebBuild3ViewModel.isCalibratedWith02Checked)
                         
                     } header: {
                         Text("Step 9")
@@ -63,23 +55,23 @@ struct TRebBuild3View: View {
                     
                     Section {
                         // Step 10
-                        Toggle("MV (High Oxygen)", isOn: $isMVHighOxygenChecked)
+                        Toggle("MV (High Oxygen)", isOn: $appViewModel.trebBuild3ViewModel.isMVHighOxygenChecked)
                         
                         HStack {
                             Section(header: Text("S1")) {
-                                TextField("%", text: $s1ReadingHighO2)
+                                TextField("mV", text: $appViewModel.trebBuild3ViewModel.s1ReadingHighO2)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                             Section(header: Text("S2")) {
-                                TextField("%", text: $s2ReadingHighO2)
+                                TextField("mV", text: $appViewModel.trebBuild3ViewModel.s2ReadingHighO2)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                             Section(header: Text("S3")) {
-                                TextField("%", text: $s3ReadingHighO2)
+                                TextField("mV", text: $appViewModel.trebBuild3ViewModel.s3ReadingHighO2)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
@@ -93,7 +85,7 @@ struct TRebBuild3View: View {
                 
             }
             NavigationLink("Next") {
-                TRebBuild4View()
+                TRebBuild4View(appViewModel: appViewModel)
             }
             .modifier(PrimaryButtonModifier())
             .foregroundColor(.white)
@@ -114,5 +106,5 @@ struct TRebBuild3View: View {
 
 
 #Preview {
-    TRebBuild3View()
+    TRebBuild3View(appViewModel: AppViewModel())
 }

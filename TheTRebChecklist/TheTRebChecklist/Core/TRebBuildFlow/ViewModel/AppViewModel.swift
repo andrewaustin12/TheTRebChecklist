@@ -29,66 +29,81 @@ class AppViewModel: ObservableObject {
     // TReb Build 7 View Model
     @Published var trebBuild7ViewModel = TRebBuild7ViewModel()
     
+    // TReb Build 8 View Model
+    @Published var trebBuild8ViewModel = TRebBuild8ViewModel()
+    
     // Add a computed property to check if all steps are completed
     var areAllStepsCompleted: Bool {
         print("Debugging areAllStepsCompleted")
         
         let allStepsCompleted =
         // Build View 1
-            trebBuild1ViewModel.is02DilFilledChecked &&
-            !trebBuild1ViewModel.oxygenPressure.isEmpty &&
-            !trebBuild1ViewModel.diluent1Pressure.isEmpty &&
-            trebBuild1ViewModel.is02DilAnalyzedChecked &&
-            !trebBuild1ViewModel.oxygenPercent.isEmpty &&
-            !trebBuild1ViewModel.diluent1Percent.isEmpty &&
-            trebBuild1ViewModel.isUsingMixedGasChecked &&
-            !trebBuild1ViewModel.diluent2Mix.isEmpty &&
-            !trebBuild1ViewModel.diluent3Mix.isEmpty &&
-            !trebBuild1ViewModel.diluent4Mix.isEmpty &&
+        trebBuild1ViewModel.is02DilFilledChecked &&
+        !trebBuild1ViewModel.oxygenPressure.isEmpty &&
+        !trebBuild1ViewModel.diluent1Pressure.isEmpty &&
+        trebBuild1ViewModel.is02DilAnalyzedChecked &&
+        !trebBuild1ViewModel.oxygenPercent.isEmpty &&
+        !trebBuild1ViewModel.diluent1Percent.isEmpty &&
         
         // Build View 2
-            trebBuild2ViewModel.isScrubberFilledChecked &&
-            !trebBuild2ViewModel.scrubberLife.isEmpty &&
-            trebBuild2ViewModel.isOringsLubricatedChecked &&
-            trebBuild2ViewModel.isHeadScrewedTightChecked &&
-            trebBuild2ViewModel.isBatteryLifeChecked &&
-            !trebBuild2ViewModel.voltLife.isEmpty &&
-            !trebBuild2ViewModel.batterPercentLife.isEmpty &&
+        trebBuild2ViewModel.isScrubberFilledChecked &&
+        !trebBuild2ViewModel.scrubberLife.isEmpty &&
+        trebBuild2ViewModel.isOringsLubricatedChecked &&
+        trebBuild2ViewModel.isHeadScrewedTightChecked &&
+        trebBuild2ViewModel.isBatteryLifeChecked &&
+        !trebBuild2ViewModel.voltLife.isEmpty &&
+        !trebBuild2ViewModel.batterPercentLife.isEmpty &&
         
         // Build View 3
-            trebBuild3ViewModel.isSensorsCalibratedChecked &&
-            trebBuild3ViewModel.isHeadInsertedChecked &&
-            trebBuild3ViewModel.isRedMarksAlignedChecked &&
-            trebBuild3ViewModel.isLPHPHosesConnectedChecked &&
-            trebBuild3ViewModel.isBovValvesChecked &&
+        trebBuild3ViewModel.isMVAmbientAirChecked &&
+        !trebBuild3ViewModel.s1ReadingAir.isEmpty &&
+        !trebBuild3ViewModel.s3ReadingAir.isEmpty &&
+        !trebBuild3ViewModel.s3ReadingAir.isEmpty &&
+        trebBuild3ViewModel.isCalibratedWith02Checked &&
+        trebBuild3ViewModel.isMVHighOxygenChecked &&
+        !trebBuild3ViewModel.s1ReadingHighO2.isEmpty &&
+        !trebBuild3ViewModel.s2ReadingHighO2.isEmpty &&
+        !trebBuild3ViewModel.s3ReadingHighO2.isEmpty &&
         
         // Build View 4
-            trebBuild4ViewModel.isMavsWorkingChecked &&
-            trebBuild4ViewModel.isAdvWorkingChecked &&
-            trebBuild4ViewModel.isWingFunctioningPropChecked &&
-            trebBuild4ViewModel.isBovChecked &&
-            trebBuild4ViewModel.isCounterlungValveChecked &&
+        trebBuild4ViewModel.isInspectedForDamageWearChecked &&
+        trebBuild4ViewModel.isOPRVClosedChecked &&
+        trebBuild4ViewModel.isUnitAssembledCanClosedChecked &&
+        trebBuild4ViewModel.isMouthPieceValvesChecked &&
+        trebBuild4ViewModel.isLoopAssembledToUnitChecked &&
         
         // Build View 5
-            trebBuild5ViewModel.isOverpressureDumpClosed &&
-            trebBuild5ViewModel.isNegPressureTestDone &&
-            trebBuild5ViewModel.isBothValvesOpenChecked &&
+        trebBuild5ViewModel.isPositivePressureTestChecked &&
+        trebBuild5ViewModel.isCounterlungVentingChecked &&
+        trebBuild5ViewModel.isNegativePressureTestChecked &&
         
         // Build View 6
-            trebBuild6ViewModel.isPosPressureTestDone &&
-            trebBuild6ViewModel.isOverpressureDumpOpen &&
+        trebBuild6ViewModel.isDiluentBailoutOCRegChecked &&
+        trebBuild6ViewModel.isDiluentHoseConnectedChecked &&
+        trebBuild6ViewModel.isControlerOnChecked &&
+        trebBuild6ViewModel.isOxygenHoseConnectedChecked &&
+        trebBuild6ViewModel.isPreBreatheDoneChecked &&
         
         // Build View 7
-            trebBuild7ViewModel.isPrimaryHandsetChecked &&
-            trebBuild7ViewModel.isBovSwitchedCCModeChecked &&
-            trebBuild7ViewModel.isPreBreatheChecked &&
-            trebBuild7ViewModel.isBovSwitchedOCModeChecked &&
-            trebBuild7ViewModel.isHandsetOffTanksClosedChecked
+        trebBuild7ViewModel.isMAVo2DilChecked &&
+        trebBuild7ViewModel.isAcsOperationalChecked &&
+        trebBuild7ViewModel.isSolenoidWorkingChecked &&
+        trebBuild7ViewModel.isControllerOffChecked &&
+        trebBuild7ViewModel.isOxygenMiddlePressureChecked &&
+        
+        // Build View 8
+        !trebBuild8ViewModel.diveTime.isEmpty &&
+        !trebBuild8ViewModel.ccrTotalTime.isEmpty &&
+        !trebBuild8ViewModel.diveTime.isEmpty &&
+        !trebBuild8ViewModel.maxDepth.isEmpty &&
+        !trebBuild8ViewModel.scrubberUsed.isEmpty &&
+        !trebBuild8ViewModel.ppo2ThisDive.isEmpty &&
+        !trebBuild8ViewModel.availNextDive.isEmpty
         
         print("All Steps Completed: \(allStepsCompleted)")
         return allStepsCompleted
     }
-
+    
     // Add a computed property to get incomplete steps
     var incompleteSteps: [Int] {
         var steps: [Int] = []
@@ -105,33 +120,43 @@ class AppViewModel: ObservableObject {
         if !trebBuild2ViewModel.isBatteryLifeChecked { steps.append(7) }
         if trebBuild2ViewModel.voltLife.isEmpty { steps.append(7) }
         if trebBuild2ViewModel.batterPercentLife.isEmpty { steps.append(7) }
-        if !trebBuild3ViewModel.isSensorsCalibratedChecked { steps.append(11) }
-        if !trebBuild3ViewModel.isHeadInsertedChecked { steps.append(12) }
-        if !trebBuild3ViewModel.isRedMarksAlignedChecked { steps.append(13) }
-        if !trebBuild3ViewModel.isLPHPHosesConnectedChecked { steps.append(14) }
-        if !trebBuild3ViewModel.isBovValvesChecked { steps.append(15) }
-        if !trebBuild4ViewModel.isMavsWorkingChecked { steps.append(16) }
-        if !trebBuild4ViewModel.isAdvWorkingChecked { steps.append(17) }
-        if !trebBuild4ViewModel.isWingFunctioningPropChecked { steps.append(18) }
-        if !trebBuild4ViewModel.isBovChecked { steps.append(19) }
-        if !trebBuild4ViewModel.isCounterlungValveChecked { steps.append(20) }
-        if !trebBuild5ViewModel.isOverpressureDumpClosed { steps.append(21) }
-        if !trebBuild5ViewModel.isNegPressureTestDone { steps.append(22) }
-        if !trebBuild5ViewModel.isBothValvesOpenChecked { steps.append(23) }
-        if !trebBuild6ViewModel.isPosPressureTestDone { steps.append(24) }
-        if !trebBuild6ViewModel.isOverpressureDumpOpen { steps.append(25) }
-        
-        if !trebBuild7ViewModel.isPrimaryHandsetChecked { steps.append(26) }
-        if !trebBuild7ViewModel.isBovSwitchedCCModeChecked { steps.append(27) }
-        if !trebBuild7ViewModel.isPreBreatheChecked { steps.append(28) }
-        if !trebBuild7ViewModel.isBovSwitchedOCModeChecked { steps.append(29) }
-        if !trebBuild7ViewModel.isHandsetOffTanksClosedChecked { steps.append(30) }
+        if !trebBuild3ViewModel.isMVAmbientAirChecked { steps.append(8) }
+        if trebBuild3ViewModel.s1ReadingAir.isEmpty ||
+            trebBuild3ViewModel.s2ReadingAir.isEmpty ||
+            trebBuild3ViewModel.s3ReadingAir.isEmpty  { steps.append(8) }
+        if !trebBuild3ViewModel.isCalibratedWith02Checked { steps.append(9) }
+        if !trebBuild3ViewModel.isMVHighOxygenChecked { steps.append(10) }
+        if trebBuild3ViewModel.s1ReadingHighO2.isEmpty || trebBuild3ViewModel.s2ReadingHighO2.isEmpty || trebBuild3ViewModel.s3ReadingHighO2.isEmpty { steps.append(10) }
+        if !trebBuild4ViewModel.isInspectedForDamageWearChecked { steps.append(11) }
+        if !trebBuild4ViewModel.isOPRVClosedChecked { steps.append(12) }
+        if !trebBuild4ViewModel.isUnitAssembledCanClosedChecked { steps.append(13) }
+        if !trebBuild4ViewModel.isMouthPieceValvesChecked { steps.append(14) }
+        if !trebBuild4ViewModel.isLoopAssembledToUnitChecked { steps.append(15) }
+        if !trebBuild5ViewModel.isPositivePressureTestChecked { steps.append(16) }
+        if !trebBuild5ViewModel.isCounterlungVentingChecked { steps.append(17) }
+        if !trebBuild5ViewModel.isNegativePressureTestChecked { steps.append(18) }
+        if !trebBuild6ViewModel.isDiluentBailoutOCRegChecked { steps.append(19) }
+        if !trebBuild6ViewModel.isDiluentHoseConnectedChecked { steps.append(20) }
+        if !trebBuild6ViewModel.isControlerOnChecked { steps.append(21) }
+        if !trebBuild6ViewModel.isOxygenHoseConnectedChecked { steps.append(22) }
+        if !trebBuild6ViewModel.isPreBreatheDoneChecked { steps.append(23) }
+        if !trebBuild7ViewModel.isMAVo2DilChecked { steps.append(24) }
+        if !trebBuild7ViewModel.isAcsOperationalChecked { steps.append(25) }
+        if !trebBuild7ViewModel.isSolenoidWorkingChecked { steps.append(26) }
+        if !trebBuild7ViewModel.isControllerOffChecked { steps.append(27) }
+        if !trebBuild7ViewModel.isOxygenMiddlePressureChecked { steps.append(28) }
+        if trebBuild8ViewModel.diveTime.isEmpty { steps.append(29) }
+        if trebBuild8ViewModel.ccrTotalTime.isEmpty { steps.append(30) }
+        if trebBuild8ViewModel.maxDepth.isEmpty { steps.append(31) }
+        if trebBuild8ViewModel.scrubberUsed.isEmpty { steps.append(32) }
+        if trebBuild8ViewModel.ppo2ThisDive.isEmpty { steps.append(33) }
+        if trebBuild8ViewModel.availNextDive.isEmpty { steps.append(34) }
         return steps
     }
     
     var completedSteps: [Int] {
         var completed: [Int] = []
-        for step in 1...30 {
+        for step in 1...34 {
             if !incompleteSteps.contains(step) {
                 completed.append(step)
             }
@@ -164,46 +189,62 @@ class TRebBuild2ViewModel: ObservableObject {
     @Published var isBatteryLifeChecked = false
     @Published var voltLife = ""
     @Published var batterPercentLife = ""
-
+    
 }
 
 // ViewModel for TReb Build 3 View
 class TRebBuild3ViewModel: ObservableObject {
-    @Published var isSensorsCalibratedChecked: Bool = false
-    @Published var isHeadInsertedChecked: Bool = false
-    @Published var isRedMarksAlignedChecked: Bool = false
-    @Published var isLPHPHosesConnectedChecked: Bool = false
-    @Published var isBovValvesChecked: Bool = false
+    @Published var isMVAmbientAirChecked = false
+    @Published var s1ReadingAir = ""
+    @Published var s2ReadingAir = ""
+    @Published var s3ReadingAir = ""
+    @Published var isCalibratedWith02Checked = false
+    @Published var isMVHighOxygenChecked = false
+    @Published var s1ReadingHighO2 = ""
+    @Published var s2ReadingHighO2 = ""
+    @Published var s3ReadingHighO2 = ""
     
 }
 
 // ViewModel for TReb Build 4 View
 class TRebBuild4ViewModel: ObservableObject {
-    @Published var isMavsWorkingChecked: Bool = false
-    @Published var isAdvWorkingChecked: Bool = false
-    @Published var isWingFunctioningPropChecked: Bool = false
-    @Published var isBovChecked: Bool = false
-    @Published var isCounterlungValveChecked: Bool = false
-}
+    @Published var isInspectedForDamageWearChecked = false
+    @Published var isOPRVClosedChecked = false
+    @Published var isUnitAssembledCanClosedChecked = false
+    @Published var isMouthPieceValvesChecked = false
+    @Published var isLoopAssembledToUnitChecked = false}
 
 // ViewModel for TReb Build 5 View
 class TRebBuild5ViewModel: ObservableObject {
-    @Published var isOverpressureDumpClosed: Bool = false
-    @Published var isNegPressureTestDone: Bool = false
-    @Published var isBothValvesOpenChecked: Bool = false
+    @Published var isPositivePressureTestChecked = false
+    @Published var isCounterlungVentingChecked = false
+    @Published var isNegativePressureTestChecked = false
 }
 
 // ViewModel for TReb Build 6 View
 class TRebBuild6ViewModel: ObservableObject {
-    @Published var isPosPressureTestDone: Bool = false
-    @Published var isOverpressureDumpOpen: Bool = false
+    @Published var isDiluentBailoutOCRegChecked = false
+    @Published var isDiluentHoseConnectedChecked = false
+    @Published var isControlerOnChecked = false
+    @Published var isOxygenHoseConnectedChecked = false
+    @Published var isPreBreatheDoneChecked = false
 }
 
 // ViewModel for TReb Build 7 View
 class TRebBuild7ViewModel: ObservableObject {
-    @Published var isPrimaryHandsetChecked: Bool = false
-    @Published var isBovSwitchedCCModeChecked: Bool = false
-    @Published var isPreBreatheChecked: Bool = false
-    @Published var isBovSwitchedOCModeChecked: Bool = false
-    @Published var isHandsetOffTanksClosedChecked: Bool = false
+    @Published var isMAVo2DilChecked = false
+    @Published var isAcsOperationalChecked = false
+    @Published var isSolenoidWorkingChecked = false
+    @Published var isControllerOffChecked = false
+    @Published var isOxygenMiddlePressureChecked = false
+}
+
+// ViewModel for TReb Build 8 View
+class TRebBuild8ViewModel: ObservableObject {
+    @Published var diveTime = ""
+    @Published var ccrTotalTime = ""
+    @Published var maxDepth = ""
+    @Published var scrubberUsed = ""
+    @Published var ppo2ThisDive = ""
+    @Published var availNextDive = ""
 }

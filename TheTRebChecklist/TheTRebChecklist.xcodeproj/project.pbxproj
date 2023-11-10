@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FA2F9C22AFE58B90055A929 /* SummaryMixedGasCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA2F9C12AFE58B90055A929 /* SummaryMixedGasCard.swift */; };
 		3FC304922AF6186A00926A42 /* TheTRebChecklistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC304912AF6186A00926A42 /* TheTRebChecklistApp.swift */; };
 		3FC304942AF6186A00926A42 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC304932AF6186A00926A42 /* WarningView.swift */; };
 		3FC304962AF6186B00926A42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC304952AF6186B00926A42 /* Assets.xcassets */; };
@@ -36,9 +37,16 @@
 		3FF7C6F52AF8063E00713F5F /* TRebBuild7View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7C6F42AF8063E00713F5F /* TRebBuild7View.swift */; };
 		3FF7C6F72AF80A1300713F5F /* TRebBuildSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7C6F62AF80A1300713F5F /* TRebBuildSummaryView.swift */; };
 		3FF7C6FA2AF8B03800713F5F /* SummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7C6F92AF8B03800713F5F /* SummaryCard.swift */; };
+		3FF7C6FC2AF93DC500713F5F /* SummaryGasCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7C6FB2AF93DC500713F5F /* SummaryGasCard.swift */; };
+		3FF7C6FE2AF9418800713F5F /* SummaryCellAirReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7C6FD2AF9418800713F5F /* SummaryCellAirReading.swift */; };
+		3FF7C7002AF943A400713F5F /* SummaryCellO2Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7C6FF2AF943A400713F5F /* SummaryCellO2Card.swift */; };
+		3FF7C7022AF9448B00713F5F /* SummaryVoltageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7C7012AF9448B00713F5F /* SummaryVoltageCard.swift */; };
+		3FF7C7042AFA369E00713F5F /* TRebBuild8View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7C7032AFA369E00713F5F /* TRebBuild8View.swift */; };
+		3FF7C7062AFBBB2700713F5F /* DiveLogCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7C7052AFBBB2700713F5F /* DiveLogCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3FA2F9C12AFE58B90055A929 /* SummaryMixedGasCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryMixedGasCard.swift; sourceTree = "<group>"; };
 		3FC3048E2AF6186A00926A42 /* TheTRebChecklist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTRebChecklist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC304912AF6186A00926A42 /* TheTRebChecklistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheTRebChecklistApp.swift; sourceTree = "<group>"; };
 		3FC304932AF6186A00926A42 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
@@ -69,6 +77,12 @@
 		3FF7C6F42AF8063E00713F5F /* TRebBuild7View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRebBuild7View.swift; sourceTree = "<group>"; };
 		3FF7C6F62AF80A1300713F5F /* TRebBuildSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRebBuildSummaryView.swift; sourceTree = "<group>"; };
 		3FF7C6F92AF8B03800713F5F /* SummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCard.swift; sourceTree = "<group>"; };
+		3FF7C6FB2AF93DC500713F5F /* SummaryGasCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryGasCard.swift; sourceTree = "<group>"; };
+		3FF7C6FD2AF9418800713F5F /* SummaryCellAirReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCellAirReading.swift; sourceTree = "<group>"; };
+		3FF7C6FF2AF943A400713F5F /* SummaryCellO2Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCellO2Card.swift; sourceTree = "<group>"; };
+		3FF7C7012AF9448B00713F5F /* SummaryVoltageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryVoltageCard.swift; sourceTree = "<group>"; };
+		3FF7C7032AFA369E00713F5F /* TRebBuild8View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRebBuild8View.swift; sourceTree = "<group>"; };
+		3FF7C7052AFBBB2700713F5F /* DiveLogCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiveLogCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +287,7 @@
 				3FF7C6F02AF7FA8A00713F5F /* TRebBuild5View.swift */,
 				3FF7C6F22AF8010D00713F5F /* TRebBuild6View.swift */,
 				3FF7C6F42AF8063E00713F5F /* TRebBuild7View.swift */,
+				3FF7C7032AFA369E00713F5F /* TRebBuild8View.swift */,
 				3FF7C6F62AF80A1300713F5F /* TRebBuildSummaryView.swift */,
 			);
 			path = Views;
@@ -282,6 +297,12 @@
 			isa = PBXGroup;
 			children = (
 				3FF7C6F92AF8B03800713F5F /* SummaryCard.swift */,
+				3FF7C6FB2AF93DC500713F5F /* SummaryGasCard.swift */,
+				3FA2F9C12AFE58B90055A929 /* SummaryMixedGasCard.swift */,
+				3FF7C6FD2AF9418800713F5F /* SummaryCellAirReading.swift */,
+				3FF7C6FF2AF943A400713F5F /* SummaryCellO2Card.swift */,
+				3FF7C7012AF9448B00713F5F /* SummaryVoltageCard.swift */,
+				3FF7C7052AFBBB2700713F5F /* DiveLogCard.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -357,14 +378,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FC304B42AF6204F00926A42 /* WarningHeaderView.swift in Sources */,
+				3FF7C7002AF943A400713F5F /* SummaryCellO2Card.swift in Sources */,
 				3FF7C6E32AF7AF6800713F5F /* PrimaryButtonModifier.swift in Sources */,
+				3FF7C6FC2AF93DC500713F5F /* SummaryGasCard.swift in Sources */,
 				3FC304C02AF6210400926A42 /* CountdownTimerView.swift in Sources */,
 				3FC304A42AF61D0200926A42 /* SplashViewModifier.swift in Sources */,
 				3FF7C6E62AF7B1F200713F5F /* AppViewModel.swift in Sources */,
 				3FF7C6E82AF7B2DA00713F5F /* TRebBuild1View.swift in Sources */,
+				3FF7C7062AFBBB2700713F5F /* DiveLogCard.swift in Sources */,
 				3FC304BA2AF620A100926A42 /* RoundedShape.swift in Sources */,
 				3FF7C6E02AF7ADAE00713F5F /* TRebStartView.swift in Sources */,
 				3FC304A72AF61D8B00926A42 /* SplashView.swift in Sources */,
+				3FF7C6FE2AF9418800713F5F /* SummaryCellAirReading.swift in Sources */,
+				3FA2F9C22AFE58B90055A929 /* SummaryMixedGasCard.swift in Sources */,
 				3FC304AA2AF61ECC00926A42 /* NotificationHandler.swift in Sources */,
 				3FC304C82AF6249100926A42 /* ToDo.swift in Sources */,
 				3FC304C62AF6248300926A42 /* ToDoListView.swift in Sources */,
@@ -375,6 +401,7 @@
 				3FF7C6F52AF8063E00713F5F /* TRebBuild7View.swift in Sources */,
 				3FC304C42AF6247100926A42 /* DetailView.swift in Sources */,
 				3FC304922AF6186A00926A42 /* TheTRebChecklistApp.swift in Sources */,
+				3FF7C7022AF9448B00713F5F /* SummaryVoltageCard.swift in Sources */,
 				3FC304B72AF6207000926A42 /* TitleHeaderView.swift in Sources */,
 				3FC304C22AF6213F00926A42 /* SettingsView.swift in Sources */,
 				3FF7C6EA2AF7DFC000713F5F /* TRebBuild2View.swift in Sources */,
@@ -383,6 +410,7 @@
 				3FF7C6F72AF80A1300713F5F /* TRebBuildSummaryView.swift in Sources */,
 				3FC304BD2AF620D600926A42 /* ProgressBarView.swift in Sources */,
 				3FF7C6EF2AF7F43100713F5F /* TRebBuild4View.swift in Sources */,
+				3FF7C7042AFA369E00713F5F /* TRebBuild8View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

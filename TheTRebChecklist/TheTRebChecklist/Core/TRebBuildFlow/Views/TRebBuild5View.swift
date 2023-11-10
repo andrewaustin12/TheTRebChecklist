@@ -11,20 +11,18 @@ struct TRebBuild5View: View {
     @Environment(\.presentationMode) var presentationMode
     @State var showSheet: Bool = false
     
-    @State private var isPositivePressureTestChecked = false
-    @State private var isCounterlungVentingChecked = false
-    @State private var isNegativePressureTestChecked = false
+    @ObservedObject var appViewModel: AppViewModel
     
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
                 TitleHeaderView(title: "POS/NEG Checks")
-                ProgressBarView(progress: Double((350/7) * 4))
+                ProgressBarView(progress: Double((350/8) * 4))
                     .padding(.leading)
                 List {
                     Section {
                         // Step 16
-                        Toggle("Perform a 2 minute POSITIVE Pressure loop test", isOn: $isPositivePressureTestChecked)
+                        Toggle("Perform a 2 minute POSITIVE Pressure loop test", isOn: $appViewModel.trebBuild5ViewModel.isPositivePressureTestChecked)
                         Button {
                             showSheet.toggle()
                         } label: {
@@ -45,7 +43,7 @@ struct TRebBuild5View: View {
                     
                     Section {
                         // Step 17
-                        Toggle("Check automatic venting of counterlung overpressure relief valve in close [dive] position", isOn: $isCounterlungVentingChecked)
+                        Toggle("Check automatic venting of counterlung overpressure relief valve in close [dive] position", isOn: $appViewModel.trebBuild5ViewModel.isCounterlungVentingChecked)
                         
                     } header: {
                         Text("Step 17")
@@ -53,7 +51,7 @@ struct TRebBuild5View: View {
                     
                     Section {
                         // Step 18
-                        Toggle("Perform a 2 minute NEGATIVE Pressure loop test", isOn: $isNegativePressureTestChecked)
+                        Toggle("Perform a 2 minute NEGATIVE Pressure loop test", isOn: $appViewModel.trebBuild5ViewModel.isNegativePressureTestChecked)
                         Button {
                             showSheet.toggle()
                         } label: {
@@ -75,7 +73,7 @@ struct TRebBuild5View: View {
                 }
             }
             NavigationLink("Next") {
-                TRebBuild6View()
+                TRebBuild6View(appViewModel: appViewModel)
             }
             .modifier(PrimaryButtonModifier())
             .foregroundColor(.white)
@@ -95,5 +93,5 @@ struct TRebBuild5View: View {
 }
 
 #Preview {
-    TRebBuild5View()
+    TRebBuild5View(appViewModel: AppViewModel())
 }
