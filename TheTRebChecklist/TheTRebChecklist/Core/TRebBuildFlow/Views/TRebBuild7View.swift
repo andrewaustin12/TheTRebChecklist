@@ -38,7 +38,7 @@ struct TRebBuild7View: View {
         
                 }
             }
-            NavigationLink("Finish") {
+            NavigationLink("Next") {
                 TRebBuild8View(appViewModel: appViewModel)
             }
             .modifier(PrimaryButtonModifier())

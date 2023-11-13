@@ -10,6 +10,12 @@ import SwiftUI
 struct TRebBuild3View: View {
     @ObservedObject var appViewModel: AppViewModel
     
+    @FocusState private var focusedTextField: FormTextField?
+    
+    enum FormTextField {
+        case s1ReadingAir, s2ReadingAir, s3ReadingAir, s1ReadingHighO2, s2ReadingHighO2, s3ReadingHighO2
+    }
+    
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
@@ -23,18 +29,27 @@ struct TRebBuild3View: View {
                         HStack {
                             Section(header: Text("S1")) {
                                 TextField("mV", text: $appViewModel.trebBuild3ViewModel.s1ReadingAir)
+                                    .focused($focusedTextField, equals: .s1ReadingAir)
+                                    .onSubmit {focusedTextField = .s2ReadingAir}
+                                    .submitLabel(.next)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                             Section(header: Text("S2")) {
                                 TextField("mV", text: $appViewModel.trebBuild3ViewModel.s2ReadingAir)
+                                    .focused($focusedTextField, equals: .s2ReadingAir)
+                                    .onSubmit {focusedTextField = .s3ReadingAir}
+                                    .submitLabel(.next)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                             Section(header: Text("S3")) {
                                 TextField("mV", text: $appViewModel.trebBuild3ViewModel.s3ReadingAir)
+                                    .focused($focusedTextField, equals: .s3ReadingAir)
+                                    .onSubmit {focusedTextField = nil}
+                                    .submitLabel(.done)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
@@ -60,18 +75,27 @@ struct TRebBuild3View: View {
                         HStack {
                             Section(header: Text("S1")) {
                                 TextField("mV", text: $appViewModel.trebBuild3ViewModel.s1ReadingHighO2)
+                                    .focused($focusedTextField, equals: .s1ReadingHighO2)
+                                    .onSubmit {focusedTextField = .s2ReadingHighO2}
+                                    .submitLabel(.next)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                             Section(header: Text("S2")) {
                                 TextField("mV", text: $appViewModel.trebBuild3ViewModel.s2ReadingHighO2)
+                                    .focused($focusedTextField, equals: .s2ReadingHighO2)
+                                    .onSubmit {focusedTextField = .s3ReadingHighO2}
+                                    .submitLabel(.next)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                             Section(header: Text("S3")) {
                                 TextField("mV", text: $appViewModel.trebBuild3ViewModel.s3ReadingHighO2)
+                                    .focused($focusedTextField, equals: .s3ReadingHighO2)
+                                    .onSubmit {focusedTextField = nil}
+                                    .submitLabel(.done)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
@@ -98,6 +122,10 @@ struct TRebBuild3View: View {
                     } label: {
                         Image(systemName: "house")
                     }
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Dismiss") { focusedTextField = nil }
                 }
             }
         }

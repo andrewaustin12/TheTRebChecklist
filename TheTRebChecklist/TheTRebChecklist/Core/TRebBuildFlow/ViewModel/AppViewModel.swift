@@ -107,7 +107,6 @@ class AppViewModel: ObservableObject {
     // Add a computed property to get incomplete steps
     var incompleteSteps: [Int] {
         var steps: [Int] = []
-        // Build View 1
         
         if !trebBuild1ViewModel.is02DilFilledChecked { steps.append(1) }
         if trebBuild1ViewModel.oxygenPressure.isEmpty || trebBuild1ViewModel.diluent1Pressure.isEmpty { steps.append(1) }
@@ -121,9 +120,9 @@ class AppViewModel: ObservableObject {
         if trebBuild2ViewModel.voltLife.isEmpty { steps.append(7) }
         if trebBuild2ViewModel.batterPercentLife.isEmpty { steps.append(7) }
         if !trebBuild3ViewModel.isMVAmbientAirChecked { steps.append(8) }
-        if trebBuild3ViewModel.s1ReadingAir.isEmpty ||
-            trebBuild3ViewModel.s2ReadingAir.isEmpty ||
-            trebBuild3ViewModel.s3ReadingAir.isEmpty  { steps.append(8) }
+        if trebBuild3ViewModel.s1ReadingAir.isEmpty { steps.append(8) }
+        if trebBuild3ViewModel.s2ReadingAir.isEmpty { steps.append(8) }
+        if trebBuild3ViewModel.s3ReadingAir.isEmpty  { steps.append(8) }
         if !trebBuild3ViewModel.isCalibratedWith02Checked { steps.append(9) }
         if !trebBuild3ViewModel.isMVHighOxygenChecked { steps.append(10) }
         if trebBuild3ViewModel.s1ReadingHighO2.isEmpty || trebBuild3ViewModel.s2ReadingHighO2.isEmpty || trebBuild3ViewModel.s3ReadingHighO2.isEmpty { steps.append(10) }

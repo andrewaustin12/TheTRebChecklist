@@ -10,6 +10,12 @@ import SwiftUI
 struct TRebBuild2View: View {
     @ObservedObject var appViewModel: AppViewModel
     
+    @FocusState private var focusedTextField: FormTextField?
+    
+    enum FormTextField {
+        case scrubberLife, voltLife, batteryPercentLife
+    }
+    
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
@@ -23,8 +29,12 @@ struct TRebBuild2View: View {
                         HStack {
                             Section(header: Text("Time Remaining")) {
                                 TextField("Min", text: $appViewModel.trebBuild2ViewModel.scrubberLife)
+                                    .focused($focusedTextField, equals: .scrubberLife)
+                                    .onSubmit {focusedTextField = nil}
+                                    .submitLabel(.done)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
+                                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                         }
@@ -54,12 +64,18 @@ struct TRebBuild2View: View {
                         HStack {
                             Section(header: Text("Volts")) {
                                 TextField("V", text: $appViewModel.trebBuild2ViewModel.voltLife)
+                                    .focused($focusedTextField, equals: .voltLife)
+                                    .onSubmit {focusedTextField = .batteryPercentLife}
+                                    .submitLabel(.next)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                             }
                             Section(header: Text("Percent")) {
                                 TextField("%", text: $appViewModel.trebBuild2ViewModel.batterPercentLife)
+                                    .focused($focusedTextField, equals: .batteryPercentLife)
+                                    .onSubmit {focusedTextField = nil}
+                                    .submitLabel(.done)
                                     .keyboardType(.decimalPad)
                                     .padding(8) // Add padding for some spacing
                                     .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
@@ -85,6 +101,10 @@ struct TRebBuild2View: View {
                         } label: {
                             Image(systemName: "house")
                         }
+                    }
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Dismiss") { focusedTextField = nil }
                     }
                 }
             }

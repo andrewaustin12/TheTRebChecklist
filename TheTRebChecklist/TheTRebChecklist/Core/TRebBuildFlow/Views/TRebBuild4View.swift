@@ -48,7 +48,7 @@ struct TRebBuild4View: View {
                             .foregroundStyle(.unitPrimaryForeground)
                         
                     } header: {
-                        Text("Steps 11-15")
+                        Text("Steps 12-15")
                     }
         
                 }

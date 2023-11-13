@@ -10,6 +10,12 @@ import SwiftUI
 struct TRebBuild1View: View {
     @ObservedObject var appViewModel: AppViewModel
     
+    @FocusState private var focusedTextField: FormTextField?
+    
+    enum FormTextField {
+        case oxygenPressure, diluent1Pressure, oxygenPercent, diluent1Percent, diluent2Mix, diluent3Mix, diluent4Mix
+    }
+    
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
@@ -26,12 +32,19 @@ struct TRebBuild1View: View {
                             HStack {
                                 Section(header: Text("O2")) {
                                     TextField("Bar", text: $appViewModel.trebBuild1ViewModel.oxygenPressure)
+                                        .focused($focusedTextField, equals: .oxygenPressure)
+                                        .onSubmit {focusedTextField = .diluent1Pressure}
+                                        .submitLabel(.next)
                                         .keyboardType(.decimalPad)
                                         .padding(8) // Add padding for some spacing
+                                    
                                         .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                                 }
                                 Section(header: Text("Dil 1")) {
                                     TextField("Bar", text: $appViewModel.trebBuild1ViewModel.diluent1Pressure)
+                                        .focused($focusedTextField, equals: .diluent1Pressure)
+                                        .onSubmit {focusedTextField = nil }
+                                        .submitLabel(.done)
                                         .keyboardType(.decimalPad)
                                         .padding(8) // Add padding for some spacing
                                         .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
@@ -56,12 +69,18 @@ struct TRebBuild1View: View {
                                 
                                 Section(header: Text("O2")) {
                                     TextField("%", text: $appViewModel.trebBuild1ViewModel.oxygenPercent)
+                                        .focused($focusedTextField, equals: .oxygenPercent)
+                                        .onSubmit {focusedTextField = .diluent1Percent}
+                                        .submitLabel(.next)
                                         .keyboardType(.decimalPad)
                                         .padding(8) // Add padding for some spacing
                                         .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                                 }
                                 Section(header: Text("Dil 1")) {
                                     TextField("%", text: $appViewModel.trebBuild1ViewModel.diluent1Percent)
+                                        .focused($focusedTextField, equals: .diluent1Percent)
+                                        .onSubmit {focusedTextField = nil}
+                                        .submitLabel(.done)
                                         .keyboardType(.decimalPad)
                                         .padding(8) // Add padding for some spacing
                                         .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
@@ -89,19 +108,28 @@ struct TRebBuild1View: View {
                                     
                                     Section(header: Text("Dil 2")) {
                                         TextField("mix", text: $appViewModel.trebBuild1ViewModel.diluent2Mix)
-                                            .keyboardType(.decimalPad)
+                                            .focused($focusedTextField, equals: .diluent2Mix)
+                                            .onSubmit {focusedTextField = .diluent3Mix}
+                                            .submitLabel(.next)
+                                            .keyboardType(.numbersAndPunctuation)
                                             .padding(8) // Add padding for some spacing
                                             .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                                     }
                                     Section(header: Text("Dil 3")) {
                                         TextField("mix", text: $appViewModel.trebBuild1ViewModel.diluent3Mix)
-                                            .keyboardType(.decimalPad)
+                                            .focused($focusedTextField, equals: .diluent3Mix)
+                                            .onSubmit {focusedTextField = .diluent4Mix}
+                                            .submitLabel(.next)
+                                            .keyboardType(.numbersAndPunctuation)
                                             .padding(8) // Add padding for some spacing
                                             .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                                     }
                                     Section(header: Text("Dil 4")) {
                                         TextField("mix", text: $appViewModel.trebBuild1ViewModel.diluent4Mix)
-                                            .keyboardType(.decimalPad)
+                                            .focused($focusedTextField, equals: .diluent4Mix)
+                                            .onSubmit {focusedTextField = nil}
+                                            .submitLabel(.done)
+                                            .keyboardType(.numbersAndPunctuation)
                                             .padding(8) // Add padding for some spacing
                                             .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray)) // Add a gray border
                                     }
@@ -128,6 +156,10 @@ struct TRebBuild1View: View {
                     } label: {
                         Image(systemName: "house")
                     }
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Dismiss") { focusedTextField = nil }
                 }
             }
         }

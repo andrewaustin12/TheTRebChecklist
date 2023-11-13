@@ -69,7 +69,7 @@ struct TRebBuildSummaryView: View {
                     
                     
                 } else {
-                    Text("Some steps are not completed:")
+                    Text("Some steps are not finished:")
                         .font(.title)
                         .bold()
                     
