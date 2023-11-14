@@ -18,7 +18,7 @@ struct TRebStartView: View {
                 Image("treb-app-icon")
                     .resizable()
                     .frame(width: .infinity)
-                    .frame(height: 350)
+                    .frame(height: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 10.0))
                     .font(.system(size: 200))
             }
